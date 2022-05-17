@@ -1,1 +1,10 @@
-body {background: aqua;}
+p {
+    margin: 10px 0 !important;
+
+}
+body {background: rgb(141, 248, 248);}
+.login-container {
+    width: 400px;
+    margin-top: 50px; 
+    text-align: center;
+}
