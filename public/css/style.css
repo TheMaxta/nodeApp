@@ -2,9 +2,12 @@ p {
     margin: 10px 0 !important;
 
 }
-body {background: rgb(107, 160, 160);}
+body {background: hsl(195deg 67% 90%)}
 .login-container {
     width: 400px;
     margin-top: 50px; 
     text-align: center;
+}
+.card .card-content {
+    background: #d0cccc
 }
