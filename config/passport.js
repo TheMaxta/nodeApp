@@ -1,6 +1,6 @@
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const mongoose = require('mongoose')
-const User = require('./models/User')
+const User = require('../models/User.js')
 
 module.exports = function(passport) {
     passport.use( new GoogleStrategy({
@@ -9,7 +9,7 @@ module.exports = function(passport) {
         callbackURL: '/auth/google/callback'
     },
     async(accessToken, refreshToken, profile, done) => {
-        console.log(profile)
+//        console.log(profile)
         const newUser = {
             googleId: profile.id,
             displayName: profile.displayName,
