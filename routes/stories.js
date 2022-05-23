@@ -37,9 +37,9 @@ router.post('/', ensureAuth, async (req, res) => {
 //create a route
 router.get('/', ensureAuth, async (req, res) => {
     try {
-        const stories = await Story.find({ status: 'public'})
-        
-            //.populate('user')
+        const stories = await Story.find({ status: 'public' })
+
+            .populate('user')
             .sort({createdAt: 'desc' })
             .lean()
 
@@ -52,6 +52,5 @@ router.get('/', ensureAuth, async (req, res) => {
     }
      
 })
-
 
 module.exports = router  
