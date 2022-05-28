@@ -8,7 +8,6 @@ const Story = require("../models/Story.js")
 
 // @desc      Show Add page
 // @route     GET /stories/add
-//create a route
 router.get('/add', ensureAuth, (req, res) => {
     res.render('stories/add', {
     })
@@ -18,7 +17,6 @@ router.get('/add', ensureAuth, (req, res) => {
 
 // @desc      Process add Form
 // @route     POST /stories
-//create a route
 router.post('/', ensureAuth, async (req, res) => {
     try {
         req.body.user = req.user.id
@@ -34,7 +32,6 @@ router.post('/', ensureAuth, async (req, res) => {
 
 // @desc      Show All Stories 
 // @route     GET /stories/
-//create a route
 router.get('/', ensureAuth, async (req, res) => {
     try {
         const stories = await Story.find({ status: 'public' })
@@ -51,6 +48,12 @@ router.get('/', ensureAuth, async (req, res) => {
         res.render('/error/500')
     }
      
+})
+
+// @desc      Edit Stories
+// @route     GET /stories/edit/:id
+router.get('/', ensureAuth, async (req, res) => {
+    
 })
 
 module.exports = router  
