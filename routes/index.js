@@ -5,15 +5,13 @@ const router = express.Router()
 const { ensureAuth, ensureGuest } = require("../middleware/auth")
 const Story = require("../models/Story.js")
 
-
 // @desc      Login/Landing page
 // @route     GET /
 //create a route
 router.get('/', ensureGuest, (req, res) => {
     res.render('login', {
         layout: 'login'
-    })
-     
+    })  
 })
 
 // @desc      Dashboard page
@@ -43,5 +41,4 @@ router.get('/test', (req, res) => {
      
 })
 
-
-module.exports = router  
+module.exports = router

@@ -11,3 +11,11 @@ body {background: rgb(213 230 236)}
 .card .card-content {
     background: #d0cccc
 }
+.btn-floating.halfway-fab {
+    position: absolute;
+    right: 10px;
+    bottom: -20px;
+}
+.fa-small {
+    font-size: 18px !important;
+}

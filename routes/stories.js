@@ -33,14 +33,14 @@ router.post('/', ensureAuth, async (req, res) => {
 
 
 // @desc      Show All Stories 
-// @route     GET /stories/add
+// @route     GET /stories/
 //create a route
 router.get('/', ensureAuth, async (req, res) => {
     try {
         const stories = await Story.find({ status: 'public' })
 
             .populate('user')
-            .sort({createdAt: 'desc' })
+            .sort({ createdAt: 'desc' })
             .lean()
 
             res.render('stories/index', {

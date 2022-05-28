@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === "development"){
 }
 
 //Handlebars Helpers
-const { formatDate, truncate, stripTags } = require('./helpers/hbs.js')
+const { formatDate, truncate, stripTags, editIcon, select } = require('./helpers/hbs.js')
 
 
 //Handlebars
@@ -39,6 +39,8 @@ app.engine('.hbs', exphbs.engine({
     formatDate, 
     truncate,
     stripTags,
+    editIcon,
+    select,
   },
   defaultLayout: 'main',
    extname: '.hbs'}
@@ -52,12 +54,18 @@ app.use(session({
     saveUninitialized: false,
 //    store: new MongoStore({ mongooseConnection: mongoose.connection }),
 
-  }))
+  })) 
 
 
 //Passport Middleware
 app.use(passport.initialize())
 app.use(passport.session())
+
+//Set Global Variable
+app.use(function(req, res, next){
+  res.locals.user = req.user || null
+  next()
+})
 
 //Static Folder (using built in node path utility)//__dirname is path to current directory
 app.use(express.static(path.join(__dirname, 'public')))
