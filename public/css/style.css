@@ -19,3 +19,6 @@ body {background: rgb(213 230 236)}
 .fa-small {
     font-size: 18px !important;
 }
+.fab.fa-google.left {
+    font-size: 15px;
+}
