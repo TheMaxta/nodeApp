@@ -26,3 +26,7 @@ body {background: rgb(210 210 210)}
     float: right;
     margin-right: 10px;
 }
+.card {
+    max-height: 330px;
+    min-height: 330px;
+}
