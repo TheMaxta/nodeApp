@@ -50,6 +50,20 @@ router.get('/', ensureAuth, async (req, res) => {
      
 })
 
+// @desc      Show Single Story
+// @route     GET /stories/:id
+router.get('/:id', ensureAuth, async (req, res) => {
+    const story = await Story.findById( { _id: req.params.id}).lean()
+
+    if (!story){
+        res.render('/error/404')
+    } else {
+        res.render('stories/view', {
+            story,
+        })
+    }
+})
+
 // @desc      Edit Stories
 // @route     GET /stories/edit/:id
 router.get('/edit/:id', ensureAuth, async (req, res) => {
