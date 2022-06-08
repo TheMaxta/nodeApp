@@ -2,7 +2,6 @@ p {
     margin: 10px 0 !important;
 
 }
-body {background: rgb(210 210 210)}
 .login-container {
     width: 400px;
     margin-top: 50px; 
@@ -27,10 +26,11 @@ body {background: rgb(210 210 210)}
     margin-right: 10px;
 }
 
-.card {
+#grid-card {
     max-height: 330px;
     min-height: 330px;
 }
 img-small {
     width: 180px;
 }
+

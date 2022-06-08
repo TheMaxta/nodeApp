@@ -4,6 +4,7 @@ const express = require("express")
 const router = express.Router()
 const { ensureAuth, ensureGuest } = require("../middleware/auth")
 const Story = require("../models/Story.js")
+const nodemon = require("nodemon")
 
 // @desc      Login/Landing page
 // @route     GET /
@@ -19,7 +20,8 @@ router.get('/', ensureGuest, (req, res) => {
 //create a route
 router.get('/dashboard', ensureAuth, async (req, res) => {
     try {
-        const stories = await Story.find({ user: req.user.id }).lean()
+        const stories = await Story.find({ user: req.user.id }).lean().sort({ createdAt: 'desc' })
+
 
         res.render('dashboard', {
             name: req.user.firstName,
@@ -36,9 +38,26 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
 // @desc      Test page
 // @route     GET /test
 //create a route
-router.get('/test', (req, res) => {
-    res.send('This is a test: Hello, World!!!')
+router.get('/test', ensureAuth, async (req, res) => {
+    try {
+        const stories = await Story.find({ user: req.user.id })
+        .populate('user')
+        .sort({ createdAt: 'desc' })
+        .lean()
+
+        res.render('../template/index', {
+            layout: 'other',
+            name: req.user.firstName,
+            lastName: req.user.lastName,
+            stories            
+        })    
+    } catch (err) {
+        console.error(err)
+        res.render('error/500')        
+    }
+
      
 })
+
 
 module.exports = router

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Material blog</title>
+
+  <!-- CSS  -->
+
+  <link href="css/index.css" rel="stylesheet" media="screen,projection"/>
+  <link rel="shortcut icon" href="images/favicon (9).ico" type="image/x-icon">
+  <link rel="icon" href="images/favicon (9).ico" type="image/x-icon">
+</head>
+<body>
+  <div id="index-banner" class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container valign">
+        <br><br>
+        <h1 class="header center white-text text-darken-2">Welcome to the Forum!<br> {{name}} {{lastName}}</h1>
+        <div class="row center">
+          <h5 class="header col s12 light white-text text-darken-2">Scroll down to see your posts!</h5>
+        </div>
+        <div class="row center">
+          <a href="#startPosts" class="btn-floating btn-large waves-effect waves-light grey darken-2 head-link"><i class="fa fa-angle-double-down"></i></a>
+        </div>
+        <br><br>
+
+      </div>
+    </div>
+    <div class="parallax"><img src="images/woodgrain.jpg" alt="Unsplashed background img 2"></div>
+  </div>
+
+<div class="container" id="startPosts">
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="row">
+		<div class="col s12 m10 offset-m1 l9 offset-l1">
+    {{#each stories}}
+			
+                 <div class="post-preview">
+                    <a href="template/samplePost.hbs">
+                        <h4 class="post-title titleFont">
+                           {{truncate title 45}}
+                        </h4>
+                        <h6 class="post-subtitle subTitleFont">
+                            {{stripTags (truncate body 250)}}
+                        </h6>
+                    </a>
+                   <p class="post-meta"><i class="fa fa-clock-o"></i>Posted: {{formatDate createdAt 'MMMM Do YYYY h:mm a'}}
+                    <div class="chip">
+                      Author: <img src="{{user.image}}" alt="">
+                      <a href="/stories/user/{{user._id}}">{{user.displayName}}</a></p>
+                    </div>
+                </div>
+                <hr>			
+    {{else}}
+    <p>No stories to display.</p>
+    {{/each}}			
+
+		</div>
+	</div>
+</div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="container">
+            <div class="row">
+              <div class="col s12 l4 m10">
+                <h5 class="white-text">Follow "BlogName"</h5>
+                <p class="white-text">Get every new post delivered to your inbox.</p>
+			     <form>
+			    
+			      <div class="input-field">
+			        <i class="mdi-communication-email prefix"></i>
+			        <input id="icon_prefix" type="email" class="validate">
+			        <label for="icon_prefix">Email</label>
+			      </div>
+			     
+			     </form>
+			    
+			    <a class="waves-effect waves-light btn">Sign Up
+                    <i class="fa fa-sign-in right"></i></a>
+       </div><!--col-->
+              
+              
+              <div id="categories" class="col l3 offset-l1 s12 m8">
+                <h5 class="white-text">Categories</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">Category1</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Category2</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Category3</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Category4</a></li>
+                </ul>
+              </div><!--col-->
+              
+              
+              
+              <div class="col l3 s12 m8">
+                <h5 class="white-text">Archives</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">March 2015</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">April 2015</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">May 2015</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">June 2015</a></li>
+                </ul>
+              </div><!--col-->
+              
+            </div><!--row-->
+            
+            <div class="row">
+            	<div class="col s12 l3 offset-l5">
+            		
+            	
+            	<a href="#"><i style="font-size: 38px;" class="fa fa-brands fa-facebook-square"></i></a> &nbsp;&nbsp;&nbsp;
+            	<a href="#"><i style="font-size: 38px;" class="fa fa-brands fa-twitter-square"></i></a>&nbsp;&nbsp;&nbsp;
+            	<a href="#"><i style="font-size: 38px;" class="fa fa-brands fa-google-plus-square"></i></a>
+            	</div>
+            	
+            </div><!--row-->
+          </div><!--conatiner-->
+    <div class="footer-copyright">
+      <div class="container">
+       <p>Copyright © Your website name</p>
+       <br>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script type="text/javascript" script-name="alex-brush" src="http://use.edgefonts.net/alex-brush.js"></script>
+  <script type="text/javascript" script-name="carter-one" src="http://use.edgefonts.net/carter-one.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script>
+  $(document).ready(function(){
+    $('.materialboxed').materialbox();
+     $('.parallax').parallax();
+      $('.button-collapse').sideNav();
+  });
+  </script>
+  <script>
+  	    $('.head-link').click(function(e) {
+        e.preventDefault();
+        
+        var goto = $(this).attr('href');
+
+        $('html, body').animate({
+            scrollTop: $(goto).offset().top
+        }, 800);
+    });
+
+  </script>
+
+	
+	
+	
+	
+			 <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-60673008-2', 'auto');
+  ga('send', 'pageview');
+</script>
+	
+	
+	
+	
+	
+	
+  </body>
+</html>
