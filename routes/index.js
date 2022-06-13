@@ -45,19 +45,20 @@ router.get('/test', ensureAuth, async (req, res) => {
         .sort({ createdAt: 'desc' })
         .lean()
 
-        res.render('../template/index', {
+        res.render('welcome', {
             layout: 'other',
             name: req.user.firstName,
             lastName: req.user.lastName,
-            stories            
+            stories   
         })    
     } catch (err) {
         console.error(err)
         res.render('error/500')        
     }
-
-     
 })
+
+
+
 
 
 module.exports = router

@@ -4,6 +4,7 @@ const express = require("express")
 const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
 const Story = require("../models/Story.js")
+const nodemon = require("nodemon")
 
 
 // @desc      Show Add page
@@ -56,7 +57,6 @@ router.get('/:id', ensureAuth, async (req, res) => {
     try {        
         const story = await Story.findById( { _id: req.params.id})
         .populate('user')
-
         .lean()
 
         if (!story){
@@ -71,6 +71,29 @@ router.get('/:id', ensureAuth, async (req, res) => {
         res.render('error/404')
     }
 })
+
+// @desc      Testing new single story page
+// @route     GET /stories/template/:id
+router.get('/temp/:id', ensureAuth, async (req, res) => {
+    try {        
+        const story = await Story.findById( { _id: req.params.id})
+        .populate('user')
+        .lean()
+
+        if (!story){
+            res.render('/error/404')
+        } else {
+            res.render('../template/singlePost', {
+                layout: 'other',
+                story,
+            })
+        }
+    } catch (err) {
+        console.error(err)
+        res.render('error/404')
+    }
+})
+
 
 // @desc      Show Users Stories/y
 // @route     GET /stories/:userId
