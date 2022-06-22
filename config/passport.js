@@ -17,7 +17,6 @@ module.exports = function(passport) {
             lastName: profile.name.familyName,
             image: profile.photos[0].value
         }
-
         try {
             //query db to check if user already exists
             let user = await User.findOne({ googleId: profile.id })
@@ -33,14 +32,13 @@ module.exports = function(passport) {
         }
 
     }))
-
     
   passport.serializeUser((user, done) => {
     done(null, user.id)
   })
 
   passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => done(err, user))
+    User.findById(id, (err, user) => done(err, user));
   })
 
 }

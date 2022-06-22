@@ -83,7 +83,7 @@ router.get('/temp/:id', ensureAuth, async (req, res) => {
         if (!story){
             res.render('/error/404')
         } else {
-            res.render('../template/singlePost', {
+            res.render('stories/singlePost', {
                 layout: 'other',
                 story,
             })
