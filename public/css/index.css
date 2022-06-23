@@ -17,6 +17,9 @@ p {
   height: auto;
   color: rgba(255,255,255,.9);
 }
+#small-parallax {
+  min-height: 250px;
+}
   .parallax-container .section {
     width: 100%;
   }

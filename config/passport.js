@@ -1,3 +1,6 @@
+//known issues: NONE, I'M PERFECT!
+//jk, there is an OAuth client error that occurs when a change is made to the source code. Could potentially be a credential issue.
+//Could involve mongoose. Looking into setting up a proper express mongoose app and double checking may solve. (long way to accomplish)
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const mongoose = require('mongoose')
 const User = require('../models/User.js')
@@ -30,7 +33,6 @@ module.exports = function(passport) {
         } catch (err) {
             console.error(err)
         }
-
     }))
     
   passport.serializeUser((user, done) => {

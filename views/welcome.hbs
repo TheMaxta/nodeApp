@@ -41,6 +41,27 @@
                     <div class="chip">
                       Author: <img src="{{user.image}}" alt="">
                       <a href="/stories/user/{{user._id}}">{{user.displayName}}</a></p>
+                      
+                      <table class="striped">
+                        <tr>
+                          <tbody>
+                              <form action="/stories/{{_id}}" method="POST" id="delete-form">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn red" type="submit">
+                                  <i class="fas fa-trash"></i>
+                                </button>
+                              </form>
+
+                              <a href="/stories/edit/{{_id}}" class="btn btn-float">
+                                <i class="fas fa-edit"></i>
+                              </a>
+                          </tbody>
+                        </tr>
+                      </table>
+
+
+
+                          
                     </div>
                 </div>
                 <hr>			

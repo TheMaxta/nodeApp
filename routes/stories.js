@@ -50,7 +50,26 @@ router.get('/', ensureAuth, async (req, res) => {
     }
      
 })
+// @desc      Template : Show All Stories : Template
+// @route     GET /stories/
+router.get('/t/', ensureAuth, async (req, res) => {
+    try {
+        const stories = await Story.find({ status: 'public' })
 
+            .populate('user')
+            .sort({ createdAt: 'desc' })
+            .lean()
+
+            res.render('stories/publicIndex', {
+                layout: 'other',
+                stories
+            })
+    } catch (err) {
+        console.error(err)
+        res.render('/error/500')
+    }
+     
+})
 // @desc      Show Single Story
 // @route     GET /stories/:id
 router.get('/:id', ensureAuth, async (req, res) => {
@@ -129,7 +148,6 @@ router.get('/edit/:id', ensureAuth, async (req, res) => {
     if (!story){
         res.render('/error/404')
     }
-
     if(story.user != req.user.id){
         res.redirect('/stories')
     } else {
