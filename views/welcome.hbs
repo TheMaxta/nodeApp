@@ -37,7 +37,11 @@
                             {{stripTags (truncate body 250)}}
                         </h6>
                     </a>
-                   <p class="post-meta"><i class="fa fa-clock-o"></i>Posted: {{formatDate createdAt 'MMMM Do YYYY h:mm a'}}
+                   <p class="post-meta"><i class="fa fa-clock-o"></i>Posted: {{formatDate createdAt 'MMMM Do YYYY h:mm a'}}</p><p class="post-subtitle">Score: {{score}}</p>
+                
+
+
+                                           
                     <div class="chip">
                       Author: <img src="{{user.image}}" alt="">
                       <a href="/stories/user/{{user._id}}">{{user.displayName}}</a></p>
@@ -52,16 +56,27 @@
                                 </button>
                               </form>
 
-                              <a href="/stories/edit/{{_id}}" class="btn btn-float">
+                              <a href="/stories/edit/{{_id}}" class="btn">
                                 <i class="fas fa-edit"></i>
                               </a>
+                              
+                    <form action="/stories/upvote/{{_id}}" method="POST" id="update-form">
+                      <input type="hidden" name="_method" value="PUT">
+                      <button class="btn blue" type="upvote">
+                      <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                      </button>
+                    </form>
+                    <form action="/stories/downvote/{{_id}}" method="POST" id="update-form">
+                      <input type="hidden" name="_method" value="PUT">
+                      <button class="btn red" type="downvote">
+                       <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                      </button>
+                    </form>  
                           </tbody>
-                        </tr>
+                          
+                        </tr>                
                       </table>
 
-
-
-                          
                     </div>
                 </div>
                 <hr>			

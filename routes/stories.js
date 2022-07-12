@@ -14,6 +14,28 @@ router.get('/add', ensureAuth, (req, res) => {
     })
      
 })
+// @desc        Show add comment page
+// @route       GET /stories/:id/comment      | id is the single post's id
+router.get('/comment'), ensureAuth, (req, res) => {
+    res.render('stories/add_comment')
+}
+
+// @desc       Process add Comment Form
+// @route       GET /stories/:id/comment      | id is the single post's id
+router.post('/:id/comment'), ensureAuth, async (req, res) => {
+    try {
+        req.body.user = req.user.id
+        const story = await Story.findById( { _id: req.params.id})
+        req.body.story = story
+        await Comment.create(req.body)
+        res.redirect('/dashboard')
+
+    } catch (err) {
+        console.err(err)
+        res.render('error/500')
+    }
+}
+
 
 
 // @desc      Process add Form
@@ -157,6 +179,22 @@ router.get('/edit/:id', ensureAuth, async (req, res) => {
     }
 })
 
+// @desc      
+// @router    GET /stories/upvote/:id
+router.get('/upvote', ensureAuth, async (req, res) => {
+    const story = await Story.findOne({
+        _id: req.params.id
+    }).lean()
+
+    if (!story){
+        res.render('/error/404')
+    }
+    if(story.user != req.user.id){
+        res.redirect('/stories')
+    } else {
+        res.redirect('/stories/upvote/:id')
+    }
+})
 // @desc      Update story
 // @route     PUT /stories/:id
 router.put('/:id', ensureAuth, async (req, res) => {
@@ -182,7 +220,36 @@ router.put('/:id', ensureAuth, async (req, res) => {
         return res.render('error/500')        
     }
 })
+// @desc      Upvote Story
+// @route     PUT /stories/upvote/:id
+router.put('/upvote/:id', ensureAuth, async (req, res) => {
 
+    let story = await Story.findById(req.params.id).lean()
+    let n = story.score += 1
+    console.log("Score"+story.score)
+
+    story = await Story.findOneAndUpdate({ _id: req.params.id}, { score: n }, {
+        new: true,
+        runValidators: true,
+    })
+    res.redirect('/test')
+
+})
+// @desc      Downvote Story
+// @route     PUT /stories/downvote/:id
+router.put('/downvote/:id', ensureAuth, async (req, res) => {
+
+    let story = await Story.findById(req.params.id).lean()
+    let n = story.score -= 1
+    console.log("Score"+story.score)
+
+    story = await Story.findOneAndUpdate({ _id: req.params.id}, { score: n }, {
+        new: true,
+        runValidators: true,
+    })
+    res.redirect('/test')
+
+})
 
 // @desc      Delete story
 // @route     DELETE /stories/:id

@@ -22,7 +22,14 @@ const StorySchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    comments: [mongoose.Schema.Types.ObjectId],
+    
+    score:{
+        type: Number,
+        default: 0
     }
+
 
 })
 
