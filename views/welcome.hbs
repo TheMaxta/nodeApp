@@ -26,8 +26,7 @@
 	<br>
 	<div class="row">
 		<div class="col s12 m10 offset-m1 l9 offset-l1">
-    {{#each stories}}
-			
+    {{#each stories}}			
                  <div class="post-preview">
                     <a href="/stories/temp/{{_id}}">
                         <h4 class="post-title titleFont">
@@ -37,10 +36,7 @@
                             {{stripTags (truncate body 250)}}
                         </h6>
                     </a>
-                   <p class="post-meta"><i class="fa fa-clock-o"></i>Posted: {{formatDate createdAt 'MMMM Do YYYY h:mm a'}}</p><p class="post-subtitle">Score: {{score}}</p>
-                
-
-
+                   <p class="post-meta"><i class="fa fa-clock-o"></i>Posted: {{formatDate createdAt 'MMMM Do YYYY h:mm a'}}</p><p class="post-subtitle">Score: {{score}}</p>              
                                            
                     <div class="chip">
                       Author: <img src="{{user.image}}" alt="">

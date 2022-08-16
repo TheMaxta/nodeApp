@@ -55,7 +55,7 @@ router.post('/', ensureAuth, async (req, res) => {
 
 // @desc      Show All Stories 
 // @route     GET /stories/
-router.get('/', ensureAuth, async (req, res) => {
+router.get('/t/', ensureAuth, async (req, res) => {
     try {
         const stories = await Story.find({ status: 'public' })
 
@@ -74,7 +74,7 @@ router.get('/', ensureAuth, async (req, res) => {
 })
 // @desc      Template : Show All Stories : Template
 // @route     GET /stories/
-router.get('/t/', ensureAuth, async (req, res) => {
+router.get('/', ensureAuth, async (req, res) => {
     try {
         const stories = await Story.find({ status: 'public' })
 
@@ -113,7 +113,7 @@ router.get('/:id', ensureAuth, async (req, res) => {
     }
 })
 
-// @desc      Testing new single story page
+// @desc      new single story page
 // @route     GET /stories/template/:id
 router.get('/temp/:id', ensureAuth, async (req, res) => {
     try {        
@@ -179,22 +179,6 @@ router.get('/edit/:id', ensureAuth, async (req, res) => {
     }
 })
 
-// @desc      
-// @router    GET /stories/upvote/:id
-router.get('/upvote', ensureAuth, async (req, res) => {
-    const story = await Story.findOne({
-        _id: req.params.id
-    }).lean()
-
-    if (!story){
-        res.render('/error/404')
-    }
-    if(story.user != req.user.id){
-        res.redirect('/stories')
-    } else {
-        res.redirect('/stories/upvote/:id')
-    }
-})
 // @desc      Update story
 // @route     PUT /stories/:id
 router.put('/:id', ensureAuth, async (req, res) => {
@@ -232,7 +216,7 @@ router.put('/upvote/:id', ensureAuth, async (req, res) => {
         new: true,
         runValidators: true,
     })
-    res.redirect('/test')
+    res.redirect('/myPosts')
 
 })
 // @desc      Downvote Story
@@ -247,7 +231,7 @@ router.put('/downvote/:id', ensureAuth, async (req, res) => {
         new: true,
         runValidators: true,
     })
-    res.redirect('/test')
+    res.redirect('/myPosts')
 
 })
 
