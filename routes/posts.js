@@ -44,7 +44,7 @@ router.post('/', ensureAuth, async (req, res) => {
     try {
         req.body.user = req.user.id
         await Post.create(req.body)
-        res.redirect('/dashboard')
+        res.redirect('/myPosts')
     } catch (err) {
         console.error(err)
         res.render('/error/500')
@@ -82,7 +82,7 @@ router.get('/', ensureAuth, async (req, res) => {
             .sort({ createdAt: 'desc' })
             .lean()
 
-            res.render('posts/publicIndex', {
+            res.render('posts/publicPosts', {
                 layout: 'other',
                 posts
             })

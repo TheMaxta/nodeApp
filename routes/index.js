@@ -44,7 +44,7 @@ router.get('/myPosts', ensureAuth, async (req, res) => {
         .populate('user')
         .sort({ createdAt: 'desc' })
         .lean()
-        res.render('welcome', {
+        res.render('myPosts', {
             layout: 'other',
             name: req.user.firstName,
             lastName: req.user.lastName,
