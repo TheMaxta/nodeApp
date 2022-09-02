@@ -3,7 +3,7 @@ const res = require("express/lib/response")
 const express = require("express")
 const router = express.Router()
 const { ensureAuth, ensureGuest } = require("../middleware/auth")
-const Post = require("../models/Story.js")
+const Post = require("../models/Post.js")
 const nodemon = require("nodemon")
 
 

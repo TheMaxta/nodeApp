@@ -27,7 +27,7 @@
     {{#each posts}}
 			
                  <div class="post-preview">
-                    <a href="/stories/temp/{{_id}}">
+                    <a href="/posts/temp/{{_id}}">
                         <h4 class="post-title titleFont">
                            {{truncate title 45}}
                         </h4>
@@ -38,7 +38,7 @@
                    <p class="post-meta"><i class="fa fa-clock-o"></i>Posted: {{formatDate createdAt 'MMMM Do YYYY h:mm a'}}
                     <div class="chip">
                       Author: <img src="{{user.image}}" alt="">
-                      <a href="/stories/user/{{user._id}}">{{user.displayName}}</a></p>
+                      <a href="/posts/user/{{user._id}}">{{user.displayName}}</a></p>
                     </div>
                 </div>
                 <hr>			

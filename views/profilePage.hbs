@@ -2,7 +2,7 @@
     <H3>Profile</H1>
     <div class="chip">
                       Author: <img src="{{image}}" alt="">
-                      <a href="/stories/user/{{user._id}}">{{name}} {{lastName}} </a></p></div>
+                      <a href="/posts/user/{{user._id}}">{{name}} {{lastName}} </a></p></div>
     
     <br>
     <table class="highlight">
@@ -15,7 +15,7 @@
                     <td>First Name: </td>
                         <td>{{name}}</td>
                     <td>
-                        <a href="/stories/edit/{{_id}}" class="btn btn-float">
+                        <a href="/posts/edit/{{_id}}" class="btn btn-float">
                         <i class="fas fa-edit"></i>
                         </a>
                     </td>
@@ -24,7 +24,7 @@
                     <td>Last Name:</td>
                     <td>{{lastName}}</td>
                     <td>
-                        <a href="/stories/edit/{{_id}}" class="btn btn-float">
+                        <a href="/posts/edit/{{_id}}" class="btn btn-float">
                         <i class="fas fa-edit"></i>
                         </a>
                     </td>
@@ -71,7 +71,7 @@
                 <img src="{{image}}" class="circle responsive-img img-small">
             </div>
             <div class="card-action">
-                <a href="/stories/user/{{story.user._id}}">More From {{story.user.firstName}}</a>
+                <a href="/posts/user/{{story.user._id}}">More From {{story.user.firstName}}</a>
             </div>
         </div>
     </div>

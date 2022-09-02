@@ -28,7 +28,7 @@
 		<div class="col s12 m10 offset-m1 l9 offset-l1">
     {{#each posts}}			
                  <div class="post-preview">
-                    <a href="/stories/temp/{{_id}}">
+                    <a href="/posts/temp/{{_id}}">
                         <h4 class="post-title titleFont">
                            {{truncate title 45}}
                         </h4>
@@ -40,29 +40,29 @@
                                            
                     <div class="chip">
                       Author: <img src="{{user.image}}" alt="">
-                      <a href="/stories/user/{{user._id}}">{{user.displayName}}</a></p>
+                      <a href="/posts/user/{{user._id}}">{{user.displayName}}</a></p>
                       
                       <table class="striped">
                         <tr>
                           <tbody>
-                              <form action="/stories/{{_id}}" method="POST" id="delete-form">
+                              <form action="/posts/{{_id}}" method="POST" id="delete-form">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button class="btn red" type="submit">
                                   <i class="fas fa-trash"></i>
                                 </button>
                               </form>
 
-                              <a href="/stories/edit/{{_id}}" class="btn">
+                              <a href="/posts/edit/{{_id}}" class="btn">
                                 <i class="fas fa-edit"></i>
                               </a>
                               
-                    <form action="/stories/upvote/{{_id}}" method="POST" id="update-form">
+                    <form action="/posts/upvote/{{_id}}" method="POST" id="update-form">
                       <input type="hidden" name="_method" value="PUT">
                       <button class="btn blue" type="upvote">
                       <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                       </button>
                     </form>
-                    <form action="/stories/downvote/{{_id}}" method="POST" id="update-form">
+                    <form action="/posts/downvote/{{_id}}" method="POST" id="update-form">
                       <input type="hidden" name="_method" value="PUT">
                       <button class="btn red" type="downvote">
                        <i class="fa fa-thumbs-down" aria-hidden="true"></i>
