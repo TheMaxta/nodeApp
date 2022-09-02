@@ -23,7 +23,7 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
         const posts = await Post.find({ user: req.user.id }).lean().sort({ createdAt: 'desc' })
 
 
-        res.render('dashboard', {
+        res.render('oldViews/dashboard', {
             name: req.user.firstName,
             lastName: req.user.lastName,
             posts

@@ -103,7 +103,7 @@ router.get('/:id', ensureAuth, async (req, res) => {
         if (!post){
             res.render('/error/404')
         } else {
-            res.render('posts/view', {
+            res.render('oldViews/view', {
                 post,
             })
         }
@@ -196,7 +196,7 @@ router.put('/:id', ensureAuth, async (req, res) => {
             runValidators: true,
         })
 
-        res.redirect('/dashboard')
+        res.redirect('/myPosts')
 
     }
     } catch (err) {
@@ -240,7 +240,7 @@ router.put('/downvote/:id', ensureAuth, async (req, res) => {
 router.delete('/:id', ensureAuth, async (req, res) => {
     try {
         await Post.remove({ _id: req.params.id })
-        res.redirect('/dashboard')
+        res.redirect('/myPosts')
     } catch (err) {
         console.error(err)
         return res.render('error/500')
