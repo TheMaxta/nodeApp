@@ -20,9 +20,9 @@ module.exports = {
       editIcon: function (postUser, loggedUser, postId, floating = true) {
         if (postUser._id.toString() == loggedUser._id.toString()) {
           if (floating) {
-            return `<a href="/stories/edit/${postId}" class="btn-floating halfway-fab blue"><i class="fas fa-edit fa-small"></i></a>`
+            return `<a href="/posts/edit/${postId}" class="btn-floating halfway-fab blue"><i class="fas fa-edit fa-small"></i></a>`
           } else {
-            return `<a href="/stories/edit/${postId}"><i class="fas fa-edit"></i></a>`
+            return `<a href="/posts/edit/${postId}"><i class="fas fa-edit"></i></a>`
           }
         } else {
           return ''
