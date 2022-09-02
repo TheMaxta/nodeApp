@@ -3,7 +3,6 @@
     <div class="chip">
                       Author: <img src="{{image}}" alt="">
                       <a href="/stories/user/{{user._id}}">{{name}} {{lastName}} </a></p></div>
-    <h5>{{name}} {{lastName}}</h4>
     
     <br>
     <table class="highlight">
@@ -11,11 +10,6 @@
                 <tr>
                     <td>Profile Image:</td>
                     <td> <img src="{{image}}" class="circle responsive-img img-small"></td>
-                    <td>
-                        <a href="/stories/edit/{{_id}}" class="btn btn-float">
-                        <i class="fas fa-edit"></i>
-                        </a>
-                    </td>
                 </tr>            
                 <tr>
                     <td>First Name: </td>
@@ -40,56 +34,30 @@
                     <td>Account Created: </td>
                     <td>{{formatDate createdAt 'MMMM Do YYYY h:mm a'}}</td>
                     <td>
-                        <a href="/stories/edit/{{_id}}" class="btn btn-float">
-                        <i class="fas fa-edit"></i>
-                        </a>
+
                     </td>
                 </tr>
                 <tr>
-                    <td>First Post: </td>
-                    <td>{{lastName}}</td>
-                    <td>
-                        <a href="/stories/edit/{{_id}}" class="btn btn-float">
-                        <i class="fas fa-edit"></i>
-                        </a>
-                    </td>
+                    <td>Your First Post: </td>
+                    <td>{{oldestPost.title}}</td>
+        
                 </tr>                
                 <tr>
-                    <td>Last Post:</td>
-                    <td>{{lastName}}</td>
-                    <td>
-                        <a href="/stories/edit/{{_id}}" class="btn btn-float">
-                        <i class="fas fa-edit"></i>
-                        </a>
-                    </td>
+                    <td>Your Most Recent Post:</td>
+                    <td>{{newestPost.title}}</td>
                 </tr>
                 <tr>
                     <td>Highest Rated Post:</td>
-                    <td>{{lastName}}</td>
-                    <td>
-                        <a href="/stories/edit/{{_id}}" class="btn btn-float">
-                        <i class="fas fa-edit"></i>
-                        </a>
-                    </td>
+                    <td>{{highestPost.title}}</td>
                 </tr>
                 <tr>
                     <td>Lowest Rated Post:</td>
-                    <td>{{lastName}}</td>
-                    <td>
-                        <a href="/stories/edit/{{_id}}" class="btn btn-float">
-                        <i class="fas fa-edit"></i>
-                        </a>
-                    </td>
+                    <td>{{lowestPost.title}}</td>
                 </tr>
                 <tr>
                     <td>Total Posts:</td>
                     <td>
-                        {{lastName}}
-                    </td>
-                    <td>
-                        <a href="/stories/edit/{{_id}}" class="btn btn-float">
-                        <i class="fas fa-edit"></i>
-                        </a>
+                        {{totalNumPosts}}
                     </td>
                 </tr>                
                 

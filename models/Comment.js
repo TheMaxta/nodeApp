@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const StorySchema = new mongoose.Schema({
+const CommentSchema = new mongoose.Schema({
     score:{
         type: Int,
         default: 0
@@ -13,10 +13,10 @@ const StorySchema = new mongoose.Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-    },
-    story:{
+    Story},
+    Post:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Story',
+        ref: 'Post',
     },
     createdAt: {
         type: Date,
@@ -24,4 +24,4 @@ const StorySchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Story', StorySchema)
+module.exports = mongoose.model('Comment', CommentSchema)

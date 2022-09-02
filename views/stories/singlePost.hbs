@@ -7,14 +7,14 @@
     <div class="section no-pad-bot">
       <div class="container valign">
         <br><br>
-        <h1 class="header center white-text text-darken-2">{{story.title}}</h1>
+        <h1 class="header center white-text text-darken-2">{{post.title}}</h1>
         <div class="row center">
           <h5 class="header col s12 light white-text text-darken-2">blah blah blah blah blah who cares about this subtitle anyways</h5>
           <p class="post-meta" style="color: lightgrey;"><i style="color: #f0eaea !important;" class="fa fa-clock-o"></i>Posted: June 13th 2022, 4:18:47 pm <a href="#" style="color: #bbb8b8da"></a></p>
             <div class="chip">
-                       Author: <img src="{{story.user.image}}" alt="">
-                      <a href="/stories/user/{{story.user._id}}">{{story.user.displayName}}</a>
-                    </div>
+                       Author: <img src="{{post.user.image}}" alt="">
+                      <a href="/stories/user/{{post.user._id}}">{{post.user.displayName}}</a>
+            </div>
           
         </div>
         
@@ -34,7 +34,7 @@
 
 	<div class="row">
 		<div class="col s12 m10 offset-m1 l9 offset-l1">
-			{{stripTags story.body}}
+			{{stripTags post.body}}
 			<br>
 			<br>
 			<br>

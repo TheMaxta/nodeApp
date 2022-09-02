@@ -3,7 +3,7 @@ const res = require("express/lib/response")
 const express = require("express")
 const router = express.Router()
 const { ensureAuth, ensureGuest } = require("../middleware/auth")
-const Story = require("../models/Story.js")
+const Post = require("../models/Story.js")
 const nodemon = require("nodemon")
 
 // @desc      Login/Landing page
@@ -20,13 +20,13 @@ router.get('/', ensureGuest, (req, res) => {
 //create a route
 router.get('/dashboard', ensureAuth, async (req, res) => {
     try {
-        const stories = await Story.find({ user: req.user.id }).lean().sort({ createdAt: 'desc' })
+        const posts = await Post.find({ user: req.user.id }).lean().sort({ createdAt: 'desc' })
 
 
         res.render('dashboard', {
             name: req.user.firstName,
             lastName: req.user.lastName,
-            stories
+            posts
         })
     } catch (err) {
         console.error(err)
@@ -40,7 +40,7 @@ router.get('/dashboard', ensureAuth, async (req, res) => {
 //create a route
 router.get('/myPosts', ensureAuth, async (req, res) => {
     try {
-        const stories = await Story.find({ user: req.user.id })
+        const posts = await Post.find({ user: req.user.id })
         .populate('user')
         .sort({ createdAt: 'desc' })
         .lean()
@@ -49,7 +49,7 @@ router.get('/myPosts', ensureAuth, async (req, res) => {
             name: req.user.firstName,
             lastName: req.user.lastName,
             image: req.user.image,
-            stories
+            posts
         })    
     } catch (err) {
         console.error(err)

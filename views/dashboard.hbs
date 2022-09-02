@@ -1,7 +1,7 @@
 <H3>Dashboard</H1>
 <h5>Welcome back, {{name}} {{lastName}}!</h4>
-{{#if stories}}
-<p>Here are your posts</p>
+{{#if posts}}
+<p>Here are your stories</p>
 <table class="striped">
     <thead>
         <tr>
@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        {{#each stories}}
+        {{#each posts}}
             <tr>
                 <td><a href="/stories/{{_id}}">{{title}}</a></td>
                 <td>{{formatDate createdAt 'MMMM Do YYYY h:mm a'}}</td>

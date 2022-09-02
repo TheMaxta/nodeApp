@@ -3,17 +3,41 @@ const res = require("express/lib/response")
 const express = require("express")
 const router = express.Router()
 const { ensureAuth, ensureGuest } = require("../middleware/auth")
-const Story = require("../models/User.js")
+const Post = require("../models/Story.js")
 const nodemon = require("nodemon")
 
 
 router.get('/', ensureAuth, async (req, res) => {
     try {
+        const posts = await Post.find({ user: req.user.id }).lean()
+        const oldestPost = posts[0]
+        const newestPost = posts[posts.length-1]
+        let highestPost = posts[0];
+        let lowestPost = posts[0];
+        let totalNumPosts = posts.length;
+
+
+        posts.forEach(function (currentPost, index, arr) {
+            if (currentPost.score > highestPost.score){ highestPost = currentPost }
+        });
+        posts.forEach(function (currentPost){
+            if (currentPost.score < lowestPost.score){ lowestPost = currentPost }
+        });
+
+
         res.render('profilePage', {
             layout: 'other',
             name: req.user.firstName,
             lastName: req.user.lastName,
             createdAt: req.user.createdAt,
+            image: req.user.image,
+            posts,
+            oldestPost,
+            newestPost,
+            highestPost,
+            lowestPost,
+            totalNumPosts
+            
         })    
     } catch (err) {
         console.error(err)
@@ -27,7 +51,7 @@ router.get('/', ensureAuth, async (req, res) => {
 //create a route
 router.get('/test', ensureAuth, async (req, res) => {
     try {
-        const stories = await Story.find({ user: req.user.id })
+        const posts = await Post.find({ user: req.user.id })
         .populate('user')
         .sort({ createdAt: 'desc' })
         .lean()
@@ -37,7 +61,7 @@ router.get('/test', ensureAuth, async (req, res) => {
             name: req.user.firstName,
             lastName: req.user.lastName,
             image: req.user.image,
-            stories
+            posts
         })    
     } catch (err) {
         console.error(err)
