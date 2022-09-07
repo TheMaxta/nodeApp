@@ -15,6 +15,7 @@ const PostSchema = new mongoose.Schema({
         default: 'public',
         enum: ['public', 'private']
     },
+
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -28,7 +29,14 @@ const PostSchema = new mongoose.Schema({
     score:{
         type: Number,
         default: 0
-    }
+    },
+    category:{
+        type: String,
+        default: 'General',
+        enum: ['General', 'Social Discourse','How To', 'Web Design', 'Food Reviews', 'Movie Reviews']
+    },
+
+
 })
 
 module.exports = mongoose.model('Post', PostSchema)

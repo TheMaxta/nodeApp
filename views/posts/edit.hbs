@@ -21,6 +21,23 @@
                 <label for="status">Status</label>
             </div>
         </div>
+        
+
+
+        <div class="row">
+            <label>Select Category</label>
+            <select name="category" id="category" class="browser-default">
+                {{#select post.category}}
+                <option value="General">General</option>
+                <option value="Social Discourse">Social Discourse</option>
+                <option value="How To">How To</option>
+                <option value="Web Design">Web Design</option>
+                <option value="Food Reviews">Food Reviews</option>
+                <option value="Movie Reviews">Movie Reviews</option>
+                {{/select}}
+            </select>
+        </div>
+
 
         <div class="row">
             <div class="input-field">

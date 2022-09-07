@@ -57,8 +57,4 @@ router.get('/myPosts', ensureAuth, async (req, res) => {
     }
 })
 
-
-
-
-
 module.exports = router

@@ -47,7 +47,7 @@ router.post('/', ensureAuth, async (req, res) => {
         res.redirect('/myPosts')
     } catch (err) {
         console.error(err)
-        res.render('/error/500')
+        res.render('error/500')
     }
      
 })
@@ -63,7 +63,7 @@ router.get('/t/', ensureAuth, async (req, res) => {
             .sort({ createdAt: 'desc' })
             .lean()
 
-            res.render('posts/index', {
+            res.render('oldViews/index', {
                 posts
             })
     } catch (err) {
@@ -149,7 +149,7 @@ router.get('/user/:userId', ensureAuth, async (req, res) => {
             .sort({ createdAt: 'desc' })
             .lean()
 
-            res.render('posts/index', {
+            res.render('oldViews/index', {
                 posts
             })
     } catch (err) {
@@ -194,9 +194,16 @@ router.put('/:id', ensureAuth, async (req, res) => {
         post = await Post.findOneAndUpdate({ _id: req.params.id }, req.body, {
             new:  true,
             runValidators: true,
-        })
+        }).lean()
 
-        res.redirect('/myPosts')
+        post = await Post.findById(req.params.id)
+        .lean()
+        .populate('user')
+        
+        res.render('posts/singlePost', {
+            layout: 'other',
+            post
+        })
 
     }
     } catch (err) {
