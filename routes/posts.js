@@ -121,6 +121,29 @@ router.get('/', ensureAuth, async (req, res) => {
         res.render('/error/500')
     }   
 })
+// @desc      Show Posts by Category *NEW*
+// @route     GET /posts/
+router.get('/category/:selectedCategory', ensureAuth, async (req, res) => {
+    try {
+        const posts = await Post.find({ category: req.params.selectedCategory })
+            .populate('user')
+            .sort({ createdAt: 'desc' })
+            .lean()
+
+            var category = posts[0].category;
+
+            res.render('posts/publicPosts', {
+                layout: 'other',
+                posts,
+                category
+            })
+    } catch (err) {
+        console.error(err)
+        res.render('/error/500')
+    }   
+})
+
+
 // @desc      Show Single Post
 // @route     GET /posts/:id
 router.get('/:id', ensureAuth, async (req, res) => {

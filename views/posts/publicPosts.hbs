@@ -5,7 +5,13 @@
     <div class="section no-pad-bot">
       <div class="container valign">
         <br><br>
-        <h1 class="header center white-text text-darken-2">Public<br> {{name}} {{lastName}}</h1>
+        <h1 class="header center white-text text-darken-2">
+            {{#if category}}
+              {{category}}
+            {{else}}
+              All Public Posts
+            {{/if}}
+        </h1>
         <div class="row center">
           <h5 class="header col s12 light white-text text-darken-2">Scroll down to see all posts ever made by anyone ever!</h5>
         </div>
