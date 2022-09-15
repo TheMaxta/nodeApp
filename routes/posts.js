@@ -12,7 +12,41 @@ const nodemon = require("nodemon")
 router.get('/add', ensureAuth, (req, res) => {
     res.render('posts/add', {
     })
-     
+})
+
+
+
+// @desc      Show Categories page
+// @route     GET /posts/categories
+router.get('/categories', ensureAuth, async (req, res) => {
+
+    const posts = await Post.find({ status: 'public' })
+
+    var categories = new Array();
+
+
+    
+
+    //goal: determine which categories are active and should be output, then output an array with category names 
+    //then: determine number of posts for each category
+    //then: determine active users for each category
+
+    posts.forEach(function (currentPost, index, arr){
+        categories.push(currentPost.category)
+    })
+    var uniqueChars = [...new Set(categories)];
+
+    categories = new Array(uniqueChars);
+
+    console.log(categories)
+            
+
+    res.render('posts/categories', {
+        layout: 'other',
+        posts,
+        categories
+
+    })     
 })
 // @desc        Show add comment page
 // @route       GET /posts/:id/comment      | id is the single post's id
@@ -36,8 +70,6 @@ router.post('/:id/comment'), ensureAuth, async (req, res) => {
     }
 }
 
-
-
 // @desc      Process add Form
 // @route     POST /posts
 router.post('/', ensureAuth, async (req, res) => {
@@ -51,7 +83,6 @@ router.post('/', ensureAuth, async (req, res) => {
     }
      
 })
-
 
 // @desc      Show All Posts 
 // @route     GET /posts/
@@ -69,8 +100,7 @@ router.get('/t/', ensureAuth, async (req, res) => {
     } catch (err) {
         console.error(err)
         res.render('/error/500')
-    }
-     
+    }   
 })
 // @desc      Template : Show All Posts : Template
 // @route     GET /posts/
@@ -89,8 +119,7 @@ router.get('/', ensureAuth, async (req, res) => {
     } catch (err) {
         console.error(err)
         res.render('/error/500')
-    }
-     
+    }   
 })
 // @desc      Show Single Post
 // @route     GET /posts/:id
@@ -135,7 +164,6 @@ router.get('/temp/:id', ensureAuth, async (req, res) => {
     }
 })
 
-
 // @desc      Show Users Posts/y
 // @route     GET /posts/:userId
 router.get('/user/:userId', ensureAuth, async (req, res) => {
@@ -156,9 +184,7 @@ router.get('/user/:userId', ensureAuth, async (req, res) => {
         console.error(err)
         res.render('/error/500')
     }
-     
 })
-
 
 // @desc      Edit Posts
 // @route     GET /posts/edit/:id
@@ -199,12 +225,11 @@ router.put('/:id', ensureAuth, async (req, res) => {
         post = await Post.findById(req.params.id)
         .lean()
         .populate('user')
-        
+
         res.render('posts/singlePost', {
             layout: 'other',
             post
         })
-
     }
     } catch (err) {
         console.error(err)
@@ -224,7 +249,6 @@ router.put('/upvote/:id', ensureAuth, async (req, res) => {
         runValidators: true,
     })
     res.redirect('/myPosts')
-
 })
 // @desc      Downvote Post
 // @route     PUT /posts/downvote/:id
@@ -239,7 +263,6 @@ router.put('/downvote/:id', ensureAuth, async (req, res) => {
         runValidators: true,
     })
     res.redirect('/myPosts')
-
 })
 
 // @desc      Delete post
@@ -253,6 +276,9 @@ router.delete('/:id', ensureAuth, async (req, res) => {
         return res.render('error/500')
     } 
 })
+
+
+
 
 
 module.exports = router  

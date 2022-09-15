@@ -1,0 +1,27 @@
+<div class="container">
+    <h2>Post Categories</h2>
+
+      <table class="striped">
+        <thead>
+          <tr>
+              <th>Category</th>
+              <th>Total Posts</th>
+              <th>Users</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        {{#each categories.[0]}}
+            <tr>
+               
+                <td> <a href="/posts/category/{{this}}"class="waves-effect waves-light btn-large"><i class="material-icons right">{{ this }}</i>View</a></td>
+                <td>{{ this }}</td>
+                
+                <td></td>
+            </tr>
+        {{/each}}
+
+        </tbody>
+      </table>
+      <br>
+</div>
