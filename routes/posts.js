@@ -15,7 +15,6 @@ router.get('/add', ensureAuth, (req, res) => {
 })
 
 
-
 // @desc      Show Categories page
 // @route     GET /posts/categories
 router.get('/categories', ensureAuth, async (req, res) => {
@@ -23,10 +22,7 @@ router.get('/categories', ensureAuth, async (req, res) => {
     const posts = await Post.find({ status: 'public' })
 
     var categories = new Array();
-
-
     
-
     //goal: determine which categories are active and should be output, then output an array with category names 
     //then: determine number of posts for each category
     //then: determine active users for each category
@@ -34,17 +30,29 @@ router.get('/categories', ensureAuth, async (req, res) => {
     posts.forEach(function (currentPost, index, arr){
         categories.push(currentPost.category)
     })
+
+    //hash
+    //var categoryNums = {};
+    var categoryNums = {};
+
+    categories.forEach(function(i){ categoryNums[i] =  (categoryNums[i]||0) + 1;});
+    
+    //testing
+    console.log(categoryNums);
+    //console.log(categories);
+
+    //this removes duplicates by category. We just want one of each active category
     var uniqueChars = [...new Set(categories)];
 
+
     categories = new Array(uniqueChars);
-
-    console.log(categories)
-            
-
+    
+    console.log(typeof categoryNums);          
     res.render('posts/categories', {
         layout: 'other',
         posts,
-        categories
+        categories,
+        categoryNums
 
     })     
 })
@@ -121,6 +129,7 @@ router.get('/', ensureAuth, async (req, res) => {
         res.render('/error/500')
     }   
 })
+
 // @desc      Show Posts by Category *NEW*
 // @route     GET /posts/
 router.get('/category/:selectedCategory', ensureAuth, async (req, res) => {
@@ -128,6 +137,28 @@ router.get('/category/:selectedCategory', ensureAuth, async (req, res) => {
         const posts = await Post.find({ category: req.params.selectedCategory })
             .populate('user')
             .sort({ createdAt: 'desc' })
+            .lean()
+
+            var category = posts[0].category;
+
+            res.render('posts/publicPosts', {
+                layout: 'other',
+                posts,
+                category
+            })
+    } catch (err) {
+        console.error(err)
+        res.render('/error/500')
+    }   
+})
+
+// @desc      Show TOP posts by Category 
+// @route     GET /posts/
+router.get('/top/:selectedCategory', ensureAuth, async (req, res) => {
+    try {
+        const posts = await Post.find({ category: req.params.selectedCategory })
+            .populate('user')
+            .sort({ score: 'desc' })
             .lean()
 
             var category = posts[0].category;
@@ -299,9 +330,6 @@ router.delete('/:id', ensureAuth, async (req, res) => {
         return res.render('error/500')
     } 
 })
-
-
-
 
 
 module.exports = router  

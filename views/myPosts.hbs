@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
+  <style>
+    p {
+      line-height: 1.0;
+      font-size: 1.2rem;
+    }
+  </style>
   <div id="index-banner" class="parallax-container valign-wrapper">
     <div class="section no-pad-bot">
       <div class="container valign">
@@ -27,7 +33,7 @@
 	<div class="row">
 		<div class="col s12 m10 offset-m1 l9 offset-l1">
     {{#each posts}}			
-                 <div class="post-preview">
+                 <div style="line-height: 1.0;" class="post-preview">
                     <a href="/posts/temp/{{_id}}">
                         <h4 class="post-title titleFont">
                            {{truncate title 45}}
@@ -36,8 +42,9 @@
                             {{stripTags (truncate body 250)}}
                         </h6>
                     </a>
-                   <p class="post-meta"><i class="fa fa-clock-o"></i>Posted: {{formatDate createdAt 'MMMM Do YYYY h:mm a'}}</p><p class="post-subtitle">Score: {{score}}</p>              
-                                           
+                   <p class="post-meta"><i class="fa fa-clock-o"></i>Posted: {{formatDate createdAt 'MMMM Do YYYY h:mm a'}}</p>
+                   <p class="post-subtitle">Score: {{score}}</p>
+                   <p style="line-height: 1.0;" class="post-subtitle">Category: {{category}}</p>
                     <div class="chip">
                       Author: <img src="{{user.image}}" alt="">
                       <a href="/posts/user/{{user._id}}">{{user.displayName}}</a></p>
@@ -86,7 +93,7 @@
 
 
 	
-	
+
 	
 	
 	

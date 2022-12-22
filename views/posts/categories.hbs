@@ -1,27 +1,29 @@
-<div class="container">
-    <h2>Post Categories</h2>
 
-      <table class="striped">
+<div class="container">
+  <h2>Post Categories</h2>
+        <table class="striped">
         <thead>
           <tr>
               <th>Category</th>
+              <th>Top</th>
               <th>Total Posts</th>
-              <th>Users</th>
           </tr>
         </thead>
         <tbody>
-
-        {{#each categories.[0]}}
+        {{#each categoryNums}} 
             <tr>
-               
-                <td> <a href="/posts/category/{{this}}"class="waves-effect waves-light btn-large"><i class="material-icons right">{{ this }}</i>View</a></td>
-                <td>{{ this }}</td>
+    
+                <td> <a href="/posts/category/{{@key}}"class="waves-effect waves-light btn-large"><i class="material-icons right">{{ @key }}</i>View</a></td>
+                <td><a href="/posts/top/{{@key}}"class="waves-effect waves-light btn-large">Top {{ @key }}</a></td>
+                <td> <div class="bold">{{this}}</div></td>
+                <!-- <td>{{categoryNums.[this]}}</td> -->
+                <!-- <td>{{categoryNums.["Web Design"]}}</td>-->
                 
-                <td></td>
             </tr>
         {{/each}}
 
         </tbody>
       </table>
       <br>
+
 </div>
