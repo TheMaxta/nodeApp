@@ -15,7 +15,10 @@ module.exports = {
         return str
       },
       stripTags: function (input) {
-        return input.replace(/<(?:.|\n)*?>/gm, '')
+//        return input.replace(/<(?:.|\n)*?>/gm, '')
+        return input.replace(/<[^>]*>|&nbsp;/gm, '')
+
+
       },
       editIcon: function (postUser, loggedUser, postId, floating = true) {
         if (postUser._id.toString() == loggedUser._id.toString()) {

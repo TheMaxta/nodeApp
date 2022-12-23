@@ -33,7 +33,21 @@
 			{{stripTags post.body}}
 			<br>
 			<br>
-			<br>
+			
+      <a class="btn waves-effect waves-light" type="submit" href="/posts/comment/{{post._id}}">Add Comment</a>
+      <br>
+      <p>comments:</p>
+
+      <ul class="collection">
+        {{#each comments}}
+        <li class="collection-item">User: {{user}}<br> Content: {{stripTags body}}</li>
+        {{/each}}
+
+        <li class="collection-item">hello world</li>
+        <li class="collection-item">Test world</li>
+        <li class="collection-item">hello Test</li>
+      </ul>
+  </a>
 		</div>
 	</div>
 </div>

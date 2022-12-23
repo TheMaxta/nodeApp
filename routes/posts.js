@@ -4,6 +4,7 @@ const express = require("express")
 const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
 const Post = require("../models/Post.js")
+const Comment = require('../models/Comment.js')
 const nodemon = require("nodemon")
 
 
@@ -13,7 +14,6 @@ router.get('/add', ensureAuth, (req, res) => {
     res.render('posts/add', {
     })
 })
-
 
 // @desc      Show Categories page
 // @route     GET /posts/categories
@@ -44,7 +44,6 @@ router.get('/categories', ensureAuth, async (req, res) => {
     //this removes duplicates by category. We just want one of each active category
     var uniqueChars = [...new Set(categories)];
 
-
     categories = new Array(uniqueChars);
     
     console.log(typeof categoryNums);          
@@ -56,33 +55,55 @@ router.get('/categories', ensureAuth, async (req, res) => {
 
     })     
 })
-// @desc        Show add comment page
-// @route       GET /posts/:id/comment      | id is the single post's id
-router.get('/comment'), ensureAuth, (req, res) => {
-    res.render('posts/add_comment')
-}
+
+
+// @desc      Show Add page
+// @route     GET /posts/add
+router.get('/comment/:postId', ensureAuth, async (req, res) => {
+
+    const post = await Post.findById( { _id: req.params.postId} ).lean()
+
+    res.render('posts/add_comment', {
+        post,
+    })
+})
 
 // @desc       Process add Comment Form
 // @route       GET /posts/:id/comment      | id is the single post's id
-router.post('/:id/comment'), ensureAuth, async (req, res) => {
+router.post('/add_comment/:postId', ensureAuth, async (req, res) => {
     try {
         req.body.user = req.user.id
-        const post = await Post.findById( { _id: req.params.id})
-        req.body.post = post
-        await Comment.create(req.body)
-        res.redirect('/dashboard')
 
-    } catch (err) {
-        console.err(err)
+        const post = await Post.findById( { _id: req.params.postId})
+        //console.log(post.comments[0].body);
+        //Create a new comment
+        const comment = new Comment(req.body);
+
+        await comment.save()
+        
+        await  post.comments.unshift(comment);
+
+        await  post.save();
+
+        //res.send(comment);
+        
+        //redirect
+        
+        res.redirect('/myPosts')
+
+    } catch(err) {
+        console.error(err)
         res.render('error/500')
     }
-}
+})
 
 // @desc      Process add Form
 // @route     POST /posts
 router.post('/', ensureAuth, async (req, res) => {
     try {
+        //check body from forum's user with current user session
         req.body.user = req.user.id
+        //create new post with req.body that forum page sent
         await Post.create(req.body)
         res.redirect('/myPosts')
     } catch (err) {
@@ -201,8 +222,11 @@ router.get('/:id', ensureAuth, async (req, res) => {
 router.get('/temp/:id', ensureAuth, async (req, res) => {
     try {        
         const post = await Post.findById( { _id: req.params.id})
-        .populate('user')
         .lean()
+        .populate('user')
+        .populate('comments')
+        .populate('comments.user')
+        const comments = post.comments
 
         if (!post){
             res.render('/error/404')
@@ -210,6 +234,7 @@ router.get('/temp/:id', ensureAuth, async (req, res) => {
             res.render('posts/singlePost', {
                 layout: 'other',
                 post,
+                comments,
             })
         }
     } catch (err) {

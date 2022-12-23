@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const CommentSchema = new mongoose.Schema({
     score:{
-        type: Int,
+        type: Number,
         default: 0
     },
     body:{
@@ -14,10 +14,10 @@ const CommentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    Post:{
+    post:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post',
-    },
+    }, 
     createdAt: {
         type: Date,
         default: Date.now

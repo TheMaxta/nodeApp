@@ -24,8 +24,9 @@ const PostSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    comments: [mongoose.Schema.Types.ObjectId],
-    
+
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+
     score:{
         type: Number,
         default: 0
