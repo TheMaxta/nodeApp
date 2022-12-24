@@ -39,13 +39,17 @@
       <p>comments:</p>
 
       <ul class="collection">
+      {{#if comments}}
         {{#each comments}}
-        <li class="collection-item">User: {{user}}<br> Content: {{stripTags body}}</li>
+        <li class="collection-item">
+          <p>User: {{user}}</p>
+          <p>Content: {{stripTags body}}</p>
+          <p class="light">{{formatDate createdAt 'MMMM Do YYYY h:mm a'}}</p>
+        </li>
         {{/each}}
-
-        <li class="collection-item">hello world</li>
-        <li class="collection-item">Test world</li>
-        <li class="collection-item">hello Test</li>
+      {{else}}
+        <li>No one has left any comments yet. </li>
+      {{/if}}
       </ul>
   </a>
 		</div>

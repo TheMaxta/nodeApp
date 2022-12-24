@@ -73,7 +73,6 @@ router.get('/comment/:postId', ensureAuth, async (req, res) => {
 router.post('/add_comment/:postId', ensureAuth, async (req, res) => {
     try {
         req.body.user = req.user.id
-
         const post = await Post.findById( { _id: req.params.postId})
         //console.log(post.comments[0].body);
         //Create a new comment
@@ -86,10 +85,8 @@ router.post('/add_comment/:postId', ensureAuth, async (req, res) => {
         await  post.save();
 
         //res.send(comment);
-        
         //redirect
-        
-        res.redirect('/myPosts')
+        res.redirect('/')
 
     } catch(err) {
         console.error(err)
