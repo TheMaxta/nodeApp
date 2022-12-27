@@ -1,66 +1,30 @@
 <div class="div container">
-    <H3>Profile</H1>
-    <div class="chip">
+   <br>
+   <div class="chip">
                       Author: <img src="{{image}}" alt="">
                       <a href="/posts/user/{{user._id}}">{{name}} {{lastName}} </a></p></div>
     
     <br>
+     <H3>Inbox:</H1>
     <table class="highlight">
         <tbody>
+                   
                 <tr>
-                    <td>Profile Image:</td>
-                    <td> <img src="{{image}}" class="circle responsive-img img-small"></td>
-                </tr>            
-                <tr>
-                    <td>First Name: </td>
-                        <td>{{name}}</td>
+                    <td>Opened? (Y/N)</td>
+                    <td>From: </td>
+                    <td>{{name}}</td>
+                    <td>To: </td>
+                    <td>{{name}}</td>
+                    <td>Preview: </td>
+                    <td>{{name}}</td>
+
                     <td>
                         <a href="/posts/edit/{{_id}}" class="btn btn-float">
                         <i class="fas fa-edit"></i>
                         </a>
                     </td>
                 </tr>
-                <tr>
-                    <td>Last Name:</td>
-                    <td>{{lastName}}</td>
-                    <td>
-                        <a href="/posts/edit/{{_id}}" class="btn btn-float">
-                        <i class="fas fa-edit"></i>
-                        </a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Account Created: </td>
-                    <td>{{formatDate createdAt 'MMMM Do YYYY h:mm a'}}</td>
-                    <td>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td>Your First Post: </td>
-                    <td>{{oldestPost.title}}</td>
-        
-                </tr>                
-                <tr>
-                    <td>Your Most Recent Post:</td>
-                    <td>{{newestPost.title}}</td>
-                </tr>
-                <tr>
-                    <td>Highest Rated Post:</td>
-                    <td>{{highestPost.title}}</td>
-                </tr>
-                <tr>
-                    <td>Lowest Rated Post:</td>
-                    <td>{{lowestPost.title}}</td>
-                </tr>
-                <tr>
-                    <td>Total Posts:</td>
-                    <td>
-                        {{totalNumPosts}}
-                    </td>
-                </tr>                
-                
+              
         </tbody>
     </table>
 <br>
