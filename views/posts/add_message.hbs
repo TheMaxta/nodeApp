@@ -1,0 +1,38 @@
+
+<h3>Compose Message</h3>
+<div class="row">
+    <form action="/profile/messages/add_message" method="POST" class="col s12">
+        <div class="row">
+            <div class="input-field">
+                <input type="text" id="subject" name="subject">
+                <label for="subject">Subject</label>
+            </div>
+        </div>
+        <div class="row">
+            <label>Select Recipient</label>
+            <select name="category" id="category" class="browser-default">                
+                {{#each users}}
+                        <option value="Social Discourse">{{firstName}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="row">
+            <div class="input-field">
+                <input type="text" id="sender" name="sender">                
+                <label for="sender">From: {{current_user.firstName}} </label>
+            </div>
+        </div>        
+
+        <div class="row">
+            <div class="input-field">
+                <h5>What would you like to say?:</h5>
+                <textarea id="body" name="body"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="submit" value="Save" class="btn">
+            <a href="/dashboard" class="btn orange">Cancel</a>
+        </div>
+    </form>
+</div>

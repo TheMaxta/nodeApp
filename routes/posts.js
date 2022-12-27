@@ -11,7 +11,7 @@ const nodemon = require("nodemon")
 // @desc      Show Add page
 // @route     GET /posts/add
 router.get('/add', ensureAuth, (req, res) => {
-    res.render('posts/add', {
+    res.render('posts/add_post', {
     })
 })
 

@@ -20,6 +20,7 @@ const PostSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
+    
     createdAt: {
         type: Date,
         default: Date.now
@@ -36,7 +37,6 @@ const PostSchema = new mongoose.Schema({
         default: 'General',
         enum: ['General', 'Social Discourse','How To', 'Web Design', 'Food Reviews', 'Movie Reviews']
     },
-
 
 })
 
