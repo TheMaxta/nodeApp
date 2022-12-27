@@ -41,10 +41,10 @@
       <ul class="collection">
       {{#if comments}}
         {{#each comments}}
-        <li class="collection-item">
-          <p>User: {{user}}</p>
-          <p>Content: {{stripTags body}}</p>
-          <p class="light">{{formatDate createdAt 'MMMM Do YYYY h:mm a'}}</p>
+        <li class="small collection-item">
+          <p class="blue-text text-darken-1">User: {{user}}</p>
+          <p class="indigo-text text-darken-4"> Comment:</p><p>{{stripTags body}}</p>
+          <p class="small blue-text text-darken-3">Comment Posted: {{formatDate createdAt 'MMMM Do YYYY h:mm a'}}</p>
         </li>
         {{/each}}
       {{else}}
