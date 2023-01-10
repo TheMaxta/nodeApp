@@ -2,26 +2,37 @@
 <h3>Compose Message</h3>
 <div class="row">
     <form action="/profile/messages/add_message" method="POST" class="col s12">
+
+
+        <div class="row">
+
+                <label>Select Recipient</label>
+                <select name="receiver" id="receiver" class="browser-default"> 
+                          <option value="" disabled selected>Choose A User</option>
+               
+                    {{#each users}}
+                            <option value="{{firstName}}">{{firstName}}</option>
+                    {{/each}}
+                </select>
+        </div>
+
+
         <div class="row">
             <div class="input-field">
                 <input type="text" id="subject" name="subject">
                 <label for="subject">Subject</label>
             </div>
         </div>
-        <div class="row">
-            <label>Select Recipient</label>
-            <select name="category" id="category" class="browser-default">                
-                {{#each users}}
-                        <option value="Social Discourse">{{firstName}}</option>
-                {{/each}}
-            </select>
-        </div>
+    
         <div class="row">
             <div class="input-field">
-                <input type="text" id="sender" name="sender">                
-                <label for="sender">From: {{current_user.firstName}} </label>
+                <select disabled>
+                    <input type="text" id="sender" name="sender">                
+                    <label for="sender">From: {{name}} </label>
+                </select>
             </div>
-        </div>        
+        </div> 
+
 
         <div class="row">
             <div class="input-field">

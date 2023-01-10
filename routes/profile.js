@@ -4,7 +4,7 @@ const express = require("express")
 const router = express.Router()
 const { ensureAuth, ensureGuest } = require("../middleware/auth")
 const Post = require("../models/Post.js")
-const Message = require("../models/Comment.js")
+const Message = require("../models/Message.js")
 const User = require("../models/User.js")
 const nodemon = require("nodemon")
 const { render } = require("express/lib/response")
@@ -76,7 +76,13 @@ router.get('/test', ensureAuth, async (req, res) => {
 
 router.get('/messages', ensureAuth, async (req, res) => {
     try {
+
         const posts = await Post.find({ user: req.user.id }).lean()
+        const myInbox = await Message.find({ receiver: req.user}).lean()
+
+
+        //testing remove later
+        console.log(myInbox)
 
 
         res.render('messagesPage', {
@@ -84,7 +90,7 @@ router.get('/messages', ensureAuth, async (req, res) => {
             name: req.user.firstName,
             lastName: req.user.lastName,
             image: req.user.image,
-            
+            myInbox            
         })    
     } catch (err) {
         console.error(err)
@@ -94,13 +100,13 @@ router.get('/messages', ensureAuth, async (req, res) => {
 
 router.get('/messages/add_message', ensureAuth, async (req, res) => {
     req.body.user = req.user.id
-    const current_user = req.body.user
-
+    const current_user = req.user
 
     const users = await User.find().lean()
-
+    console.log(req.user.firstName)
     res.render('posts/add_message',{
         users,
+        name: req.user.firstName,
         current_user
     })
 
@@ -114,7 +120,25 @@ router.post('/messages/add_message', ensureAuth, async (req, res) => {
 
         req.body.user = req.user.id
 
-        await Message.create(req.body)
+        //await Message.create(req.body)
+
+        req.body.sender = req.user.id
+
+        const user = req.user
+
+        //need to match receiver's name returned by post.body to the user object of the recipient
+        req.body.receiver = await User.findOne({ firstName: req.body.receiver })
+        req.body.sender = await User.findOne({ firstName: user.firstName })
+
+        console.log("\nTest message req.body: ")
+        console.log(req.body)
+
+
+        //req.body.receiver = await User.find( firstName: receiverName)
+        //req.body.sender = req.body.user
+
+        const message = new Message(req.body);
+        await message.save()
 
         res.redirect('/')
 
