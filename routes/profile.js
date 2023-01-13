@@ -79,10 +79,11 @@ router.get('/messages', ensureAuth, async (req, res) => {
 
         const posts = await Post.find({ user: req.user.id }).lean()
         const myInbox = await Message.find({ receiver: req.user}).lean()
+        const inboxType = true
 
 
         //testing remove later
-        console.log(myInbox)
+        //console.log(myInbox)
 
 
         res.render('messagesPage', {
@@ -90,13 +91,65 @@ router.get('/messages', ensureAuth, async (req, res) => {
             name: req.user.firstName,
             lastName: req.user.lastName,
             image: req.user.image,
-            myInbox            
+            myInbox,
+            inboxType        
         })    
     } catch (err) {
         console.error(err)
         res.render('error/500')        
     }
 })
+
+router.get('/messages/sent', ensureAuth, async (req, res) => {
+    try {
+
+        const posts = await Post.find({ user: req.user.id }).lean()
+        const myInbox = await Message.find({ sender: req.user}).lean()
+        const inboxType = false
+
+        //testing remove later
+        //console.log(myInbox)
+
+
+        res.render('messagesPage', {
+            layout: 'other',
+            name: req.user.firstName,
+            lastName: req.user.lastName,
+            image: req.user.image,
+            myInbox,
+            inboxType          
+        })    
+    } catch (err) {
+        console.error(err)
+        res.render('error/500')        
+    }
+})
+
+//user params to receiver id for individual message. Send individual message id through html link
+router.get('/messages/view', ensureAuth, async (req, res) => {
+    try {
+
+        const posts = await Post.find({ user: req.user.id }).lean()
+        const myInbox = await Message.find({ sender: req.user}).lean()
+
+        //testing remove later
+        //console.log(myInbox)
+
+
+        res.render('viewMessage', {
+            layout: 'other',
+            name: req.user.firstName,
+            lastName: req.user.lastName,
+            image: req.user.image
+
+        })    
+    } catch (err) {
+        console.error(err)
+        res.render('error/500')        
+    }
+})
+
+
 
 router.get('/messages/add_message', ensureAuth, async (req, res) => {
     req.body.user = req.user.id

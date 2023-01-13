@@ -5,15 +5,41 @@
                       <a href="/posts/user/{{user._id}}">{{name}} {{lastName}} </a></p></div>
     
     <br>
-     <H3>Inbox:</H1>
-     <a href="/profile/messages/add_message" class="waves-effect waves-light btn-large"><i class="material-icons right">+</i>Compose Message</a>
+    {{#if inboxType}}
+        <H3>Your Inbox:</H1>
+    {{else}}
+        <H3>Your Sent Messages:</H1>
+    {{/if}}    
+        <a href="/profile/messages/add_message" class="waves-effect waves-light btn-large" style="
+        margin-bottom: 14px;">
+                <i class="fas fa-pen-square" style="margin-right: 10px"></i>
+                Compose Message
+        </a>
+    {{#if inboxType}}
+        <a href="/profile/messages/sent" class="waves-effect waves-light btn-large" style="
+    margin-bottom: 14px; float: right;">
+                <i class="fas fa-paper-plane" style="margin-right: 10px;"></i>
+                Sent Messages
+        </a>
+    {{else}}
+        <a href="/profile/messages" class="waves-effect waves-light btn-large" style="
+    margin-bottom: 14px; float: right;">
+                <i class="fas fa-paper-plane" style="margin-right: 10px;"></i>
+                Check Inbox
+        </a>
+    {{/if}}          
 
+    
     <table class="highlight">
+        <br>
         <tbody>
                    <!-- This is where you loop for all messages attached to user class-->
             {{#each myInbox}}
-                <tr>                    
-                    <td>Opened? {{new}}</td>
+                {{#if new}}
+                    <tr style="background: #dff4f3">
+                {{else}}
+                    <tr>
+                {{/if}}
                     <td>From: </td>
                     <td>{{sender}}</td>
                     <td>Subject: </td>
@@ -23,7 +49,11 @@
 
                     <td>
                         <a href="/posts/edit/{{_id}}" class="btn btn-float">
-                        <i class="fas fa-edit"></i>
+                        {{#if new}}
+                            <i class="fas fa-envelope"></i>
+                        {{else}}
+                            <i class="fas fa-envelope-open"></i>
+                        {{/if}}
                         </a>
                     </td>
                 </tr>    

@@ -36,8 +36,6 @@ router.get('/categories', ensureAuth, async (req, res) => {
     var categoryNums = {};
 
     categories.forEach(function(i){ categoryNums[i] =  (categoryNums[i]||0) + 1;});
-    
-
 
     //this removes duplicates by category. We just want one of each active category
     var uniqueChars = [...new Set(categories)];
@@ -50,7 +48,6 @@ router.get('/categories', ensureAuth, async (req, res) => {
         posts,
         categories,
         categoryNums
-
     })     
 })
 
