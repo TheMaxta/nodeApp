@@ -103,7 +103,7 @@ router.get('/messages', ensureAuth, async (req, res) => {
 router.get('/messages/sent', ensureAuth, async (req, res) => {
     try {
 
-        const posts = await Post.find({ user: req.user.id }).lean()
+//        const posts = await Post.find({ user: req.user.id }).lean()
         const myInbox = await Message.find({ sender: req.user}).lean()
         const inboxType = false
 
@@ -126,21 +126,30 @@ router.get('/messages/sent', ensureAuth, async (req, res) => {
 })
 
 //user params to receiver id for individual message. Send individual message id through html link
-router.get('/messages/view', ensureAuth, async (req, res) => {
+router.get('/messages/view/:id', ensureAuth, async (req, res) => {
     try {
+        const message = await Message.findOne({
+            _id: req.params.id
+        }).lean()
 
-        const posts = await Post.find({ user: req.user.id }).lean()
+
+        //okay, so i want to update an attribute in the message model. New should be set to false when a message is opened,,,
+        //I believe i may need to make a post or a put request,
+        // I should be able to route this request through this current function by simply calling another fucntion inside of this one
+
+        //message.new = false
+
         const myInbox = await Message.find({ sender: req.user}).lean()
 
         //testing remove later
         //console.log(myInbox)
-
+        
 
         res.render('viewMessage', {
-            layout: 'other',
             name: req.user.firstName,
             lastName: req.user.lastName,
-            image: req.user.image
+            image: req.user.image,
+            message
 
         })    
     } catch (err) {
